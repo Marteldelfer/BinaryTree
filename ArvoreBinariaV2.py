@@ -1,3 +1,5 @@
+#Works well, except when working with repeated numbers
+
 class Node:
 
     def __init__(self, value) -> None:
@@ -176,9 +178,11 @@ class BinaryTree:
             #The to be deleted node is the root
             else:
                 newCurrentNode: Node = currentNode._right
+                newDadNode: Node = currentNode
 
                 #Finds the smaller node that is bigger than newCurrentNode
                 while newCurrentNode._left != None:
+                    newDadNode = newCurrentNode
                     newCurrentNode = newCurrentNode._left
                 
                 #Set new current node to replace current node
@@ -187,17 +191,23 @@ class BinaryTree:
                     newCurrentNode._right = currentNode._right
 
                 #Replace current node with new current node
+                if newDadNode._left == newCurrentNode:
+                    newDadNode._left = None
                 self._root = newCurrentNode
 
 
-arvore = BinaryTree()
-arvore.show()
-arvore.insert(10)
-arvore.insert(5)
-arvore.insert(7)
-arvore.insert(3)
-arvore.insert(15)
-arvore.insert(18)
-arvore.insert(13)
-arvore.delete(10)
-arvore.show()
+def main():
+    arvore = BinaryTree()
+    arvore.show()
+    arvore.insert(10)
+    arvore.insert(5)
+    arvore.insert(7)
+    arvore.insert(3)
+    arvore.insert(15)
+    arvore.insert(18)
+    arvore.insert(13)
+    arvore.delete(10)
+    arvore.show()
+
+if __name__ == '__main__':
+    main()
